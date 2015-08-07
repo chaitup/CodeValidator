@@ -1,0 +1,19 @@
+{{extend 'layout-teacher.html'}}
+<H3>{{=A('Create a New Assignment',_href=URL("new"))}}</H3>
+<ol>
+<table>
+{{for problem in problems:}}
+{{rows = db(db.submission.problem_id==problem.id).select()}}
+
+<tr><td>{{=LI(A(H3(problem.title), _href=URL("show", args=problem.id)))}} </td></tr>
+<tr><td>created on {{=problem.created_on}}</td></tr> 
+<tr><td>Submissions: {{=len(rows)}}</td></tr>
+<tr><td>[ {{=A('edit', _href=URL('edit', args=problem.id))}} ]
+[ {{=A('delete', _href=URL('delete', args=problem.id))}} ]</td></tr>
+
+
+<tr><td><hr size="20" width="300%"></td></tr>
+{{pass}}
+</table>
+</ol>
+<p>

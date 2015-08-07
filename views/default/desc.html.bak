@@ -1,0 +1,13 @@
+{{response.files.extend([URL('static','css/dropbox.css')])}}
+{{extend 'layout.html'}}
+{{from datetime import datetime}}
+{{import datetime}}
+{{t = datetime.date.today()}}
+
+
+{{=DIV(problem.body, _class='container'}}
+{{=A(IMG(_src=URL('default','download',args=problem.file),_width="60px",_height="60px"),_href=URL("display",args=problem.id))}}
+<a href="{{=URL(f='download', args=problem.inputfile)}}"><div style= "margin-bottom:5px"></div>[sample input file]</a>
+<a href="{{=URL(f='download', args=problem.outputfile)}}">[ sample output file]</a>
+
+{{=form}}

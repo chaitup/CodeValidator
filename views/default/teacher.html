@@ -1,0 +1,37 @@
+{{extend 'layout-teacher.html'}}
+
+<br>
+<br>
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-sm-1">
+			<INPUT type="button" value="+" style="height:50px; width:50px; font-size: 30px; "
+onclick="location.href='{{=URL(r=request,f='new')}}'"/>
+		</div>
+		<br>
+		<div style="font-size:20px">Add New Assignment</div>
+	</div>
+
+	<br>
+	
+	<ol>
+	{{for problem in problems:}}
+	{{rows = db(db.submission.problem_id==problem.id).select()}}
+		<div class="row">
+				<div class="col-sm-3">
+					<li>{{=DIV(A(problem.title,_href=URL("show",args=problem.id)),_style="font-size:20px")}}</li>
+					<b>Type: {{=problem.Type}}</b><br>
+					Created on: {{=problem.created_on}}
+					<br>
+					Submissions: {{=len(rows)}}
+					<br>
+					{{=A('edit', _href=URL('edit', args=problem.id))}}
+					{{=A('delete', _href=URL('delete', args=problem.id))}}
+					{{=HR()}}
+				</div>
+		</div>
+	{{pass}}
+	</ol>
+
+</div>

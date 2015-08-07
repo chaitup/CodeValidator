@@ -1,0 +1,38 @@
+{{response.files.extend([URL('static','css/dropbox.css')])}}
+{{extend 'layout.html'}}
+{{from datetime import datetime}}
+{{import datetime}}
+{{t = datetime.date.today()}}
+
+<style>
+  html, body {
+    height: 100%;
+  }
+  tableContainer-1 {
+    height: 100%;
+    width: 45%;
+    */display: table;
+	position:absolute;
+  }
+  tableContainer-2 {
+    vertical-align: middle;
+	
+    
+    height: 100%;
+  }
+  myTable {
+    margin: 1 auto;
+  }
+</style>
+<br>
+</br>
+  <div id="tableContainer-1">
+    <table border>
+      <tr><td>{{=problem.body}}</td></tr>
+      <tr><td>{{=A(IMG(_src=URL('default','download',args=problem.file),_width="60px",_height="60px"),_href=URL("display",args=problem.id))}}</td></tr>
+      <tr><td><a href="{{=URL(f='download', args=problem.inputfile)}}"><div style= "margin-bottom:5px"></div>[sample input file]</a>
+<a href="{{=URL(f='download', args=problem.outputfile)}}">[ sample output file]</a></td></tr>
+	<tr><td>{{=form}}</td></tr>
+    </table>
+  </div>
+

@@ -1,0 +1,24 @@
+{{extend 'layout.html'}}
+{{from datetime import datetime}}
+{{import datetime}}
+{{t = datetime.date.today()}}
+
+
+
+{{if len(problems):}}
+<ol>
+<table>
+{{for problem in problems:}}
+	{{rows = db(db.submission.problem_id==problem.id).select()}}
+	<tr><td>{{=LI(A(H3(problem.title), _href=URL("desc", args=problem.id)))}}</td></tr>
+	<tr><td>created on {{=problem.created_on}} </td></tr>
+	<tr><td>submissions: {{=len(rows)}}</td></tr>
+	<tr><td><hr size="20" width="300%"></td></tr>
+	{{pass}}
+</table>
+{{else:}}
+{{=HR()}}
+<H4>No Assignments posted yet.</H4>
+{{pass}}
+</ol>
+

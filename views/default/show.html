@@ -1,0 +1,43 @@
+{{extend 'layout-teacher.html'}}
+<br>
+<br>
+{{=DIV(DIV(DIV(problem.body,_class="row"),_class='col-sm-4', _style="font-size:18px"), _class='container-fluid')}}
+
+{{=DIV('submissions: ', len(submissions),_class='col-sm-4',_style="font-size:15px")}}
+<br>
+<br>
+{{=DIV(A(IMG(_src=URL('default','download',args=problem.image),_width="60px",_height="60px"),_href=URL("display",args=problem.id)),_id='123',_class='container-fluid')}}
+<br>
+{{if len(submissions):}}
+<ol>
+ <div class="row">
+	<div class="col-sm-5">
+{{for submission in submissions:}}
+	
+			<li>{{=DIV(submission.email, ' submitted on ',submission.posted_on,A('        		[Download]',_href=URL("download",args=submission.file)))}}
+			<nobr>
+			{{if problem.Type == "Not Immediate":}}
+			
+			<input align ="left" class="btn btn-primary btn-default" value="Compile" style="height:30px; width:80px ;left: 950px; right:250; top: 50" onclick="location.href='{{=URL(f='mailing', args=[submission.problem_id, submission.id])}}'"></p>
+			</li>
+			{{pass}}
+			{{=HR()}}
+		
+{{pass}}
+<input align ="left" class="btn btn-primary btn-default" value="Back" style="height:30px; width:80px ;left: 950px; right:250; top: 50" onclick="location.href='{{=URL(f='teacher')}}'">
+</div>	
+	</div>
+</ol>
+
+
+{{else:}}
+	<div class="col-sm-4">
+		{{=HR()}}
+		<br>
+		No Submissions Yet.
+		<br><br>
+		 <input align ="left" class="btn btn-primary btn-default" value="Back" style="height:30px; width:80px ;left: 950px; right:250; top: 50" onclick="location.href='{{=URL(f='teacher')}}'">
+
+	</div>
+
+{{pass}}

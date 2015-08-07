@@ -1,0 +1,23 @@
+{{import os}}
+{{extend 'layout-teacher.html'}}
+<p>
+<div style="margin-top:15px; margin-bottom:25px"></div>
+<table>
+<H4><tr><td style="padding-left:50px; padding-right:900px;"><div style="margin-top:5px; margin-bottom:5px"></div>{{=problem.body}}</td></tr></H4>
+ <tr><td style="padding-left:50px; padding-right:900px;">submissions: {{=len(submissions)}}</td></tr>
+<tr><td style="padding-left:50px; padding-right:900px;">
+<div style="margin-top:15px; margin-bottom:15px"></div>
+{{=A(IMG(_src=URL('default','download',args=problem.file),_width="60px",_height="60px"),_href=URL("display",args=problem.id))}}</td></tr>
+<tr><td style="padding-left:50px; padding-right:900px;"><hr size="20" width="150%"></td></tr>
+{{if len(submissions):}}
+
+{{for submission in submissions:}}
+	<tr><td style="padding-left:50px; padding-right:800px;"><div style="margin-top:1px; margin-bottom:15px"></div><li> {{=submission.email}} submitted on  {{=submission.posted_on}}   <a href="{{=URL(f='download', args=submission.file)}}">[Download]</a></li></td></tr>
+	<tr><td style="padding-left:50px; padding-right:900px;"><hr size="20" width="150%"></td></tr>
+	{{pass}}
+{{else:}}
+<tr><td style="padding-left:50px; padding-right:900px;"><div style="margin-top:15px; margin-bottom:15px"></div>{{=HR()}}</td></tr>
+<tr><td style="padding-left:50px; padding-right:900px;"><h4>No submissions yet.</h4></td></tr>
+{{pass}}
+</table>
+</ol>

@@ -1,0 +1,23 @@
+{{response.files.extend([URL('static','css/dropbox.css')])}}
+{{extend 'layout.html'}}
+{{from datetime import datetime}}
+{{import datetime}}
+{{t = datetime.date.today()}}
+<br>
+<br>
+{{=DIV(DIV(DIV(problem.body,_class="row"),_class='col-sm-4', _style="font-size:18px"), _class='container-fluid')}}
+<br>
+{{=DIV(A(IMG(_src=URL('default','download',args=problem.image),_width="60px",_height="60px"),_href=URL("display",args=problem.id)),_id='123',_class='container-fluid')}}
+<br>
+<br>
+{{if datetime.timedelta(days=0)>=(t-problem.Duedate):}}
+{{=DIV(form, _class="col-sm-2")}}
+
+{{else:}}
+<div class='col-sm-4'>
+<h5 style="color:red; font-size:20">It's too late. Due date completed.</h5>
+
+<input align ="left" class="btn btn-primary btn-default" value="Back" style="height:30px; width:80px ;left: 950px; right:250; top: 50" onclick="location.href='{{=URL(f='student')}}'">
+
+</div>
+{{pass}}

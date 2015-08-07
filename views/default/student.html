@@ -1,0 +1,23 @@
+{{extend 'layout.html'}}
+<br>
+<br>
+{{if len(problems):}}
+<ol>
+{{for problem in problems:}}
+{{rows = db(db.submission.problem_id==problem.id).select()}}
+	<div class="row">
+            <div class="col-sm-3">
+				<li>{{=DIV(A(problem.title,_href=URL("desc",args=problem.id)),_style="font-size:20px")}}</li>
+				Created on: {{=problem.created_on}}
+				<br>
+				Submissions: {{=len(rows)}}
+				<br>
+				Due date: {{=problem.Duedate}}
+				{{=DIV(HR())}}
+			</div>
+	</div>
+{{pass}}
+</ol>
+{{else:}}
+<H4>No Assignments posted yet.</H4>
+{{pass}}

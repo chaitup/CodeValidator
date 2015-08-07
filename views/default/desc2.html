@@ -1,0 +1,29 @@
+{{response.files.extend([URL('static','css/dropbox.css')])}}
+{{extend 'layout.html'}}
+{{from datetime import datetime}}
+{{import datetime}}
+{{t = datetime.date.today()}}
+
+<div style="margin-top:25px; margin-bottom:15px">
+</div>
+<table>
+<!--<tbody style="border: 1px solid gray; border-radius: 15px; display:block">-->
+<tr><td style="padding-left:50px; padding-right:900px;">{{=problem.body}}</td></tr>
+
+<tr><td style="padding-left:50px; padding-right:900px;"><div style="margin-top:15px; margin-bottom: 15px">
+</div>
+{{=A(IMG(_src=URL('default','download',args=problem.file),_width="60px",_height="60px"),_href=URL("display",args=problem.id))}}</td></tr>
+<tr><td style="padding-left:50px; padding-right:900px;"><a href="{{=URL(f='download', args=problem.inputfile)}}">[sample input file]</a>
+<a href="{{=URL(f='download', args=problem.outputfile)}}">[ sample output file]</a></td>
+
+
+{{if datetime.timedelta(days=15)>(t-problem.created_on):}}
+<tr><td style="padding-left: 10px; padding-right:900px;"><div style= "margin-bottom:15px"></div>
+{{=form}}
+</td>
+</tr>
+
+</table>
+{{else:}}
+It's too late. Due date completed.
+{{pass}}
